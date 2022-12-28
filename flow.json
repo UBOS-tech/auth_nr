@@ -147,7 +147,9 @@
             "f833e1216c97cff7",
             "d2dc6d60f2aadf80",
             "62ac94f341138925",
-            "27ca4b188d5acd21"
+            "71d0784401d97a30",
+            "6012ab98a19cbb6a",
+            "ccbf43ec2e0f83d7"
         ],
         "x": 14,
         "y": 19,
@@ -607,13 +609,14 @@
         "id": "71d0784401d97a30",
         "type": "http in",
         "z": "c8b39bad946d8ab6",
+        "g": "d78377c07a215120",
         "name": "registration",
         "url": "/registration",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
         "x": 100,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "f2f94b0b491998e3",
@@ -626,6 +629,7 @@
         "id": "ccbf43ec2e0f83d7",
         "type": "debug",
         "z": "c8b39bad946d8ab6",
+        "g": "d78377c07a215120",
         "name": "db",
         "active": true,
         "tosidebar": true,
@@ -635,8 +639,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 540,
+        "x": 650,
+        "y": 520,
         "wires": []
     },
     {
@@ -3705,8 +3709,8 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "check",
-        "func": "msg.collection = \"admins\"\nmsg.fromApp = msg.payload\n\nnode.warn(msg.fromApp)\n\nmsg.payload = {\n    email: msg.fromApp.email.toLowerCase(),\n    deleted: false\n}\n\n// msg.action = msg.collection + \"_с\"\n// msg.target = msg.payload._id\nreturn msg;\n\n\n///  ============================================\n// const  payload = {\n//     email: \"1@gamil.com\",\n//     password: \"1\"\n// }\n\n\n// msg.collection = \"admins\";\n// msg.fromApp = payload;\n\n// node.warn(msg.fromApp)\n\n// msg.payload = {\n//     email: msg.fromApp.email\n// }\n\n// return msg;",
-        "outputs": 1,
+        "func": "const regexEmail = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/i;\nconst regexPassword = /^(?!.*\\s).{8,}/;\nconst email = msg.payload.email.toLowerCase();\n\nif (!regexEmail.test(email)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"Email is invalid\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else if (!regexPassword.test(msg.payload.password)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"The password is invalid. The value must be at least 8 characters and without whitespaces\",\n        code: 401\n    }\n\n    return [null, msg];\n    \n} else {\n    msg.collection = \"admins\"\n    msg.fromApp = msg.payload\n\n    node.warn(msg.fromApp)\n\n    msg.payload = {\n        email: email,\n        deleted: false\n    }\n\n    return [msg, null];\n}",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3717,6 +3721,10 @@
             [
                 "d8f65e08d1802e8e",
                 "9b40d9caf853741d"
+            ],
+            [
+                "769c853fb108cedb",
+                "53cd8649fa65084f"
             ]
         ]
     },
@@ -3844,9 +3852,9 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "",
-        "statusCode": "",
+        "statusCode": "401",
         "headers": {},
-        "x": 1030,
+        "x": 1040,
         "y": 900,
         "wires": []
     },
@@ -4092,7 +4100,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "",
-        "func": "msg.payload = msg.payload[0]\nlet arr =   msg.payload.menu.sort(function (a, b) {\n    return +a.position - +b.position;\n});\n\nfunction sortF(sortArr){\n    sortArr.sort(function (a, b) {\n        return +a.position - +b.position;\n    });\n    return sortArr\n}\n\nlet language = msg.user.user.language\n\nif (language == \"he\"){\n    let menu = arr.map(el => {\n        if (el.isParent) {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"icon\": el.icon ? el.icon : \"\",\n                \"children\": sortF(el.childModules).map(item => {\n                    return {\n                        \"label\": item.name,\n                        \"value\": item.name,\n                        \"icon\": item.icon ? item.icon : \"\",\n                    }\n                })\n            }\n        } else {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"children\": [],\n                \"icon\": el.icon ? el.icon : \"\",\n            }\n        }\n    })\n    msg.menu = menu\n} else{\n    let menu = arr.map(el => {\n        if (el.isParent) {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"icon\": el.icon ? el.icon : \"\",\n                \"children\": sortF(el.childModules).map(item => {\n                    return {\n                        \"label\": item.name,\n                        \"value\": item.name,\n                        \"icon\": item.icon ? item.icon : \"\",\n                    }\n                })\n            }\n        } else {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"children\": [],\n                \"icon\": el.icon ? el.icon : \"\",\n            }\n        }\n    })\n    msg.menu = menu\n}\n\nmsg.permissions = msg.payload.permissions\nmsg.payload = {\n    auth: \"Success\",\n    code: 200,\n    user: {\n        \"menu\":msg.menu,\n        \"permission\": msg.permissions,\n        \"translation\": msg.payload.translation[0],\n        \"info\":msg.user\n    }\n}\nreturn msg;",
+        "func": "msg.payload = msg.payload[0]\nlet arr =   msg.payload.menu.sort(function (a, b) {\n    return +a.position - +b.position;\n});\n\nfunction sortF(sortArr){\n    sortArr.sort(function (a, b) {\n        return +a.position - +b.position;\n    });\n    return sortArr\n}\n\nlet language = msg.user.user.language\n\nif (language == \"he\"){\n    let menu = arr.map(el => {\n        if (el.isParent) {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"icon\": el.icon ? el.icon : \"\",\n                \"children\": sortF(el.childModules).map(item => {\n                    return {\n                        \"label\": item.name,\n                        \"value\": item.name,\n                        \"icon\": item.icon ? item.icon : \"\",\n                    }\n                })\n            }\n        } else {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"children\": [],\n                \"icon\": el.icon ? el.icon : \"\",\n            }\n        }\n    })\n    msg.menu = menu\n} else{\n    let menu = arr.map(el => {\n        if (el.isParent) {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"icon\": el.icon ? el.icon : \"\",\n                \"children\": sortF(el.childModules).map(item => {\n                    return {\n                        \"label\": item.name,\n                        \"value\": item.name,\n                        \"icon\": item.icon ? item.icon : \"\",\n                    }\n                })\n            }\n        } else {\n            return {\n                \"label\": el.name,\n                \"value\": el.name,\n                \"children\": [],\n                \"icon\": el.icon ? el.icon : \"\",\n            }\n        }\n    })\n\n    msg.menu = menu\n}\n\nmsg.permissions = msg.payload.permissions\nmsg.payload = {\n    auth: \"Success\",\n    code: 200,\n    user: {\n        \"menu\":msg.menu,\n        \"permission\": msg.permissions,\n        \"translation\": msg.payload.translation[0],\n        \"info\": msg.user\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4206,7 +4214,7 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1260,
+        "x": 1230,
         "y": 820,
         "wires": [
             [
@@ -4611,7 +4619,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 310,
-        "y": 500,
+        "y": 420,
         "wires": []
     },
     {
@@ -4620,8 +4628,8 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "check ",
-        "func": "msg.collection = \"admins\";\nmsg.oldpayload = msg.payload;\n\nmsg.payload = {\n    email: msg.payload.email.toLowerCase(),\n    deleted: false\n};\n\nreturn msg;",
-        "outputs": 1,
+        "func": "const regexEmail = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/i;\nconst regexPassword = /^(?!.*\\s).{8,}/;\nconst email = msg.payload.email.toLowerCase();\n\nif (!regexEmail.test(email)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"Email is invalid\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else if (!regexPassword.test(msg.payload.password)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"The password is invalid. The value must be at least 8 characters and without whitespaces\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else {\n    msg.collection = \"admins\";\n    msg.oldpayload = msg.payload;\n\n    msg.payload = {\n        email: email,\n        deleted: false\n    };\n\n    return [msg, null];\n}",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4632,6 +4640,10 @@
             [
                 "e4082ecde347ac24",
                 "9ed90dc87878d5c1"
+            ],
+            [
+                "82bf44e646ff81c1",
+                "3d2a6611794a1aab"
             ]
         ]
     },
@@ -4679,13 +4691,22 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "check",
-        "func": "if (msg.payload.length > 0) {\n    msg.payload = {\n        data: \"This email address already exists\",\n        code: 400,\n    }\n    return [null, msg]\n} else {\n    return [msg, null]\n}\n\n\n",
-        "outputs": 2,
+        "func": "if (msg.payload.length > 0) {\n    if (!msg.payload[0].active) {\n        const decoded = jwt.verify(msg.payload[0].verifyToken, 'test');\n        const dateNow = new Date().getTime();\n\n        if (decoded.exp < dateNow) {\n            msg.query = { _id: objectid(msg.payload[0]._id) }\n            msg.payload = {\n                $set: {\n                    deleted: false\n                }\n            }\n\n            return [null, null, msg, null]\n        } else {\n            msg.payload = {\n                verifyToken: msg.payload[0].verifyToken,\n                email: msg.payload[0].email\n            }\n\n            return [null, null, null, msg]\n        }\n    } else {\n        msg.payload = {\n            data: \"This email address already exists\",\n            code: 400,\n        }\n        return [null, msg, null, null]\n    }\n}\nelse {\n    return [msg, null, null, null]\n}\n\n\n",
+        "outputs": 4,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "libs": [],
-        "x": 630,
+        "libs": [
+            {
+                "var": "jwt",
+                "module": "jsonwebtoken"
+            },
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 650,
         "y": 460,
         "wires": [
             [
@@ -4695,6 +4716,12 @@
             [
                 "9da58b8ba7897ee6",
                 "a7f063573564d610"
+            ],
+            [
+                "6012ab98a19cbb6a"
+            ],
+            [
+                "eed04ab51fe181f6"
             ]
         ]
     },
@@ -4723,8 +4750,8 @@
                 "module": "jsonwebtoken"
             }
         ],
-        "x": 840,
-        "y": 440,
+        "x": 1080,
+        "y": 320,
         "wires": [
             [
                 "eed04ab51fe181f6",
@@ -4741,8 +4768,8 @@
         "name": "",
         "statusCode": "400",
         "headers": {},
-        "x": 820,
-        "y": 500,
+        "x": 1140,
+        "y": 400,
         "wires": []
     },
     {
@@ -4759,8 +4786,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 540,
+        "x": 1180,
+        "y": 440,
         "wires": []
     },
     {
@@ -4777,8 +4804,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 810,
-        "y": 400,
+        "x": 1050,
+        "y": 280,
         "wires": []
     },
     {
@@ -4792,8 +4819,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1080,
-        "y": 400,
+        "x": 1320,
+        "y": 280,
         "wires": [
             []
         ]
@@ -4815,8 +4842,8 @@
                 "module": "jsonwebtoken"
             }
         ],
-        "x": 1070,
-        "y": 440,
+        "x": 1310,
+        "y": 320,
         "wires": [
             [
                 "c156d588bb3ba207",
@@ -4839,8 +4866,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1050,
-        "y": 480,
+        "x": 1290,
+        "y": 360,
         "wires": []
     },
     {
@@ -4857,8 +4884,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1250,
-        "y": 400,
+        "x": 1490,
+        "y": 280,
         "wires": []
     },
     {
@@ -4869,8 +4896,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1230,
-        "y": 480,
+        "x": 1470,
+        "y": 360,
         "wires": []
     },
     {
@@ -5176,7 +5203,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "2229ae9934019399",
         "name": "redirect to page",
-        "func": "const token = await jwt.sign(\n    { user_id: msg.payload[0]._id, email: msg.payload[0].email },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\nconst uiUrl = env.get(\"uiUrl\");\n\nmsg.token = token\nmsg.statusCode = 302\nmsg.headers = {\n    \"Access-Control-Allow-Origin\": \"*\",\n    \"Access-Control-Allow-Credentials\": true,\n    \"location\": `${uiUrl}/Login`\n}\n// msg.cookies = {};\n// msg.cookies[\"user_token\"] = token;\n// msg.cookies={\n//     user_token:{\n//         value:msg.token,\n//         domain: \"prodnodritman-6335828aa386c31100000ae2.ubos.tech\"\n//     },\n//     verify_token: null,\n//     email_register: null\n// }\n\nmsg.collection = \"admins\";\nmsg.query = {\n    _id: objectid(msg.payload[0]._id)\n}\nmsg.payload = {\n    $set: {\n        active: true,\n        verifyToken: null\n    }\n}\n\nnode.send(msg)",
+        "func": "const token = await jwt.sign(\n    { user_id: msg.payload[0]._id, email: msg.payload[0].email },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\nconst uiUrl = env.get(\"uiUrl\");\n\nmsg.token = token\nmsg.statusCode = 302\nmsg.headers = {\n    \"Access-Control-Allow-Origin\": \"*\",\n    \"Access-Control-Allow-Credentials\": true,\n    \"location\": `${uiUrl}/Login`\n}\n\nmsg.collection = \"admins\";\nmsg.query = {\n    _id: objectid(msg.payload[0]._id)\n}\nmsg.payload = {\n    $set: {\n        active: true,\n        verifyToken: null\n    }\n}\n\nnode.send(msg)",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -5340,7 +5367,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "5bf7ccb6c6709633",
         "name": "redirect to page",
-        "func": "const dateNow = new Date().getTime();\nconst uiUrl = env.get(\"uiUrl\");\n\nif (msg.payload[0].resetPassExpireToken > dateNow) {\n    msg.statusCode = 302\n    msg.headers = {\n        \"Access-Control-Allow-Origin\": \"*\",\n        \"Access-Control-Allow-Credentials\": true,\n        \"location\": `${uiUrl}/ResetPassword?token=${msg.token}`\n    }\n} else {\n    msg.payload = '<h1>Link expired</h1>';\n};\n\n// Will be deleted user_token:\n// msg.cookies={\n//     user_token:{\n//         value: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM1NmJiZjJmOTVlNTMxMTAwMDAwMDEyIiwiZW1haWwiOiIxQDEuMSIsImlhdCI6MTY2NjY5NjEzNSwiZXhwIjoxNjY2NzA1MTM1fQ.s6PMOAm1b57JxHQ2SBEahd-1nRdOydQZZXg0dm7REFc\",\n//         domain:\"ubos.tech\"\n//     },\n//     reset_pass_token: {\n//         value: msg.token,\n//         domain: \"ubos.tech\"\n//     }\n// }\n\nreturn msg;\n",
+        "func": "const dateNow = new Date().getTime();\nconst uiUrl = env.get(\"uiUrl\");\n\nif (msg.payload[0].resetPassExpireToken > dateNow) {\n    msg.statusCode = 302\n    msg.headers = {\n        \"Access-Control-Allow-Origin\": \"*\",\n        \"Access-Control-Allow-Credentials\": true,\n        \"location\": `${uiUrl}/ResetPassword?token=${msg.token}`\n    }\n} else {\n    msg.payload = '<h1>Link expired</h1>';\n};\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -5438,8 +5465,8 @@
         "z": "c8b39bad946d8ab6",
         "g": "5bf7ccb6c6709633",
         "name": "query to db",
-        "func": "msg.collection = \"admins\";\n\nmsg.email = msg.payload.email;\n\nmsg.payload = {\n    email: msg.payload.email.toLowerCase(),\n    deleted: false\n}\n\nreturn msg;",
-        "outputs": 1,
+        "func": "const regexEmail = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/i;\nconst email = msg.payload.email.toLowerCase();\n\nif (!regexEmail.test(email)) {\n\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"Email is invalid\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else {\n    msg.collection = \"admins\";\n\n    msg.email = msg.payload.email;\n\n    msg.payload = {\n        email: email,\n        deleted: false\n    }\n\n    return [msg, null];\n} \n",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5449,6 +5476,10 @@
         "wires": [
             [
                 "59a6366d8be0ed5e"
+            ],
+            [
+                "5164464dd17d2bc2",
+                "c08229195cce1b53"
             ]
         ]
     },
@@ -5788,7 +5819,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "5bf7ccb6c6709633",
         "name": "query update pass",
-        "func": "const dateNow = new Date().getTime();\n// const token = await jwt.sign(\n//     { user_id: msg.payload[0]._id, email: msg.payload[0].email },\n//     \"test\",\n//     {\n//         expiresIn: \"150m\",\n//     }\n// );\nlet check = await bcrypt.compare(msg.newPassword, msg.payload[0].password);\nlet encryptedPassword = await bcrypt.hash(msg.newPassword, 10);\nmsg.oldpayload = msg.payload;\nnode.warn(msg.payload);\n\nif (msg.payload[0].resetPassExpireToken < dateNow) {\n\n    msg.payload = '<h1>link expired</h1>';\n\n} else {\n\n    if (!check) {\n\n        msg.statusCode = 401;\n        msg.payload = {\n            data: 'The password must be different from the previous one',\n            code: 401\n        }\n\n        return [null, msg];\n\n    } else {\n        \n        msg.collection = \"admins\";\n        msg.query = {\n            _id: objectid(msg.payload[0]._id)\n        }\n        msg.payload = {\n            $set: {\n                password: encryptedPassword,\n                resetPassToken: \"\",\n                resetPassExpireToken: null\n            }\n        }\n        \n        return [msg, null];\n\n    }\n\n}\n\n",
+        "func": "const dateNow = new Date().getTime();\nlet check = await bcrypt.compare(msg.newPassword, msg.payload[0].password);\nlet encryptedPassword = await bcrypt.hash(msg.newPassword, 10);\n\nmsg.oldpayload = msg.payload;\n\nif (msg.payload[0].resetPassExpireToken < dateNow) {\n\n    msg.payload = '<h1>link expired</h1>';\n\n} else {\n\n    if (!!check) {\n\n        msg.statusCode = 401;\n        msg.payload = {\n            data: 'The password must be different from the previous one',\n            code: 401\n        }\n\n        return [null, msg];\n\n    } else {\n        \n        msg.collection = \"admins\";\n        msg.query = {\n            _id: objectid(msg.payload[0]._id)\n        }\n        msg.payload = {\n            $set: {\n                password: encryptedPassword,\n                resetPassToken: \"\",\n                resetPassExpireToken: null\n            }\n        }\n        \n        return [msg, null];\n\n    }\n\n}\n\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -5956,8 +5987,8 @@
         "tls": true,
         "name": "",
         "dname": "",
-        "x": 1230,
-        "y": 440,
+        "x": 1470,
+        "y": 320,
         "wires": []
     },
     {
@@ -6438,21 +6469,106 @@
         "wires": []
     },
     {
-        "id": "27ca4b188d5acd21",
-        "type": "function",
+        "id": "769c853fb108cedb",
+        "type": "http response",
+        "z": "c8b39bad946d8ab6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 470,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "53cd8649fa65084f",
+        "type": "debug",
+        "z": "c8b39bad946d8ab6",
+        "name": "err login",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "82bf44e646ff81c1",
+        "type": "http response",
+        "z": "c8b39bad946d8ab6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 450,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "3d2a6611794a1aab",
+        "type": "debug",
+        "z": "c8b39bad946d8ab6",
+        "name": "err register",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "5164464dd17d2bc2",
+        "type": "http response",
+        "z": "c8b39bad946d8ab6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1370,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "c08229195cce1b53",
+        "type": "debug",
+        "z": "c8b39bad946d8ab6",
+        "name": "err register",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "6012ab98a19cbb6a",
+        "type": "link call",
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
-        "name": "function 31",
-        "func": "msg.collection = \"admins\"\nmsg.fromApp = msg.payload\n\nnode.warn(msg.fromApp)\n\nmsg.payload = {\n    email: msg.fromApp.email.toLowerCase(),\n    deleted: false\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 180,
+        "name": "",
+        "links": [
+            "286431cd31c9fc7a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 880,
+        "y": 500,
         "wires": [
-            []
+            [
+                "376f7da2f0d85f32"
+            ]
         ]
     }
 ]
