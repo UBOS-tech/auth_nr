@@ -360,72 +360,8 @@
         "x": 245,
         "y": 140,
         "wires": [
-            [
-                "849ed0a079f50387"
-            ]
+            []
         ]
-    },
-    {
-        "id": "849ed0a079f50387",
-        "type": "mongodb in",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "operation": "find",
-        "x": 370,
-        "y": 140,
-        "wires": [
-            [
-                "4307ecabcc6486c7"
-            ]
-        ]
-    },
-    {
-        "id": "67ae898b1fc76da0",
-        "type": "mongodb in",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "operation": "aggregate",
-        "x": 370,
-        "y": 200,
-        "wires": [
-            [
-                "6544322b922c1a49"
-            ]
-        ]
-    },
-    {
-        "id": "e18b07fe9334c730",
-        "type": "mongodb out",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "insert",
-        "x": 370,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8e0bc3c7d9972491",
-        "type": "mongodb out",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "payonly": false,
-        "upsert": false,
-        "multi": false,
-        "operation": "update",
-        "x": 370,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "b7c366424b9b7e6e",
@@ -514,6 +450,68 @@
         "x": 405,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "e18b07fe9334c730",
+        "type": "mongodb out",
+        "z": "c740254358c79788",
+        "mongodb": "fcc87bbf870e413f",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 370,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8e0bc3c7d9972491",
+        "type": "mongodb out",
+        "z": "c740254358c79788",
+        "mongodb": "fcc87bbf870e413f",
+        "name": "",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "update",
+        "x": 370,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "849ed0a079f50387",
+        "type": "mongodb in",
+        "z": "c740254358c79788",
+        "mongodb": "fcc87bbf870e413f",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "4307ecabcc6486c7"
+            ]
+        ]
+    },
+    {
+        "id": "67ae898b1fc76da0",
+        "type": "mongodb in",
+        "z": "c740254358c79788",
+        "mongodb": "fcc87bbf870e413f",
+        "name": "",
+        "collection": "",
+        "operation": "aggregate",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "6544322b922c1a49"
+            ]
+        ]
     },
     {
         "id": "71d0784401d97a30",
@@ -4512,66 +4510,6 @@
         "wires": []
     },
     {
-        "id": "c156d588bb3ba207",
-        "type": "e-mail",
-        "z": "c8b39bad946d8ab6",
-        "g": "d78377c07a215120",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "",
-        "x": 1470,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8779a87db9bcb5dc",
-        "type": "e-mail",
-        "z": "c8b39bad946d8ab6",
-        "g": "d78377c07a215120",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "",
-        "x": 730,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "c44ba9b12aa0b19b",
-        "type": "e-mail",
-        "z": "c8b39bad946d8ab6",
-        "g": "5bf7ccb6c6709633",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "",
-        "x": 2150,
-        "y": 1440,
-        "wires": []
-    },
-    {
-        "id": "2b3fe1486cce4f95",
-        "type": "e-mail",
-        "z": "c8b39bad946d8ab6",
-        "g": "5bf7ccb6c6709633",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "secure": true,
-        "tls": true,
-        "name": "",
-        "dname": "",
-        "x": 1870,
-        "y": 1800,
-        "wires": []
-    },
-    {
         "id": "03b23aac01f7893f",
         "type": "debug",
         "z": "c8b39bad946d8ab6",
@@ -5093,6 +5031,62 @@
         "statusType": "auto",
         "x": 1640,
         "y": 780,
+        "wires": []
+    },
+    {
+        "id": "c156d588bb3ba207",
+        "type": "e-mail",
+        "z": "c8b39bad946d8ab6",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1470,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8779a87db9bcb5dc",
+        "type": "e-mail",
+        "z": "c8b39bad946d8ab6",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 730,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c44ba9b12aa0b19b",
+        "type": "e-mail",
+        "z": "c8b39bad946d8ab6",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 2150,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "2b3fe1486cce4f95",
+        "type": "e-mail",
+        "z": "c8b39bad946d8ab6",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1870,
+        "y": 1800,
         "wires": []
     }
 ]
