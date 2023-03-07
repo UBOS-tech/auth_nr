@@ -51,14 +51,12 @@
             "731ac723f96cc33b",
             "d4d3c04525b14ac7",
             "05fb3fe7ecd5c415",
-            "92ca080160500366",
             "d805f50510a64b71",
             "110f980283b587bc",
             "b26cafe18475e3cb",
             "97c44ea10c943cb4",
             "c1c36f3949756248",
-            "306adf550fae80e8",
-            "656d840a3ab148aa"
+            "306adf550fae80e8"
         ],
         "x": 14,
         "y": 1119,
@@ -116,7 +114,6 @@
             "b42cb8e11e780105",
             "9b40d9caf853741d",
             "7ad3662b16de3eaf",
-            "2ebd6a025be6f11d",
             "e653dc9c2aa956f2",
             "0b6ff6d92b1de7e7",
             "2a2d93b53c8a1966",
@@ -178,7 +175,7 @@
         ],
         "x": 774,
         "y": 1119,
-        "w": 952,
+        "w": 992,
         "h": 162
     },
     {
@@ -248,7 +245,6 @@
         "nodes": [
             "2083b217673380ca",
             "ac9687b0e33d5319",
-            "f120ca88df7a87b9",
             "5189344f4260b4cb",
             "5cc768d59c9037f5",
             "58eb2605635a4f7e",
@@ -275,7 +271,8 @@
             "375a3db843bf5ca4",
             "23e86f24046953d6",
             "4c2bfcca94198e63",
-            "97840b426439aec0"
+            "97840b426439aec0",
+            "bd903ea2c5d6bd1c"
         ],
         "x": 14,
         "y": 3019,
@@ -309,7 +306,6 @@
             "8886a378d607c9c3",
             "cdf04d878afee1d5",
             "5cbf5ba2c4c74a4f",
-            "1bf0f8c3c82add30",
             "64d32109fbb50503",
             "149aa57b044f0aac",
             "b473ee4234249f14",
@@ -342,14 +338,14 @@
         "h": 922
     },
     {
-        "id": "fcc87bbf870e413f",
+        "id": "eef59e6e9401d087",
         "type": "mongodb",
-        "hostname": "db63735d50fd02061100000009-1668778177828mongo.ubos-q25hd",
+        "hostname": "127.0.0.1",
         "topology": "direct",
-        "connectOptions": "authSource=admin",
+        "connectOptions": "",
         "port": "27017",
-        "db": "mongo",
-        "name": "auth"
+        "db": "",
+        "name": ""
     },
     {
         "id": "346e518816416d1d",
@@ -360,7 +356,9 @@
         "x": 245,
         "y": 140,
         "wires": [
-            []
+            [
+                "a902fac8c21085e6"
+            ]
         ]
     },
     {
@@ -373,7 +371,7 @@
         "y": 200,
         "wires": [
             [
-                "67ae898b1fc76da0"
+                "84c75bed55ab1dd8"
             ]
         ]
     },
@@ -387,8 +385,8 @@
         "y": 320,
         "wires": [
             [
-                "e18b07fe9334c730",
-                "7739c6ef4683fa04"
+                "7739c6ef4683fa04",
+                "7ce3e0949b4a483f"
             ]
         ]
     },
@@ -399,11 +397,11 @@
         "name": "mongo Update",
         "links": [],
         "x": 255,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
-                "8e0bc3c7d9972491",
-                "5accd99f247f88ec"
+                "5accd99f247f88ec",
+                "6a3c98d4b6b016de"
             ]
         ]
     },
@@ -448,48 +446,18 @@
         "mode": "return",
         "links": [],
         "x": 405,
-        "y": 400,
+        "y": 420,
         "wires": []
     },
     {
-        "id": "e18b07fe9334c730",
-        "type": "mongodb out",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "insert",
-        "x": 370,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8e0bc3c7d9972491",
-        "type": "mongodb out",
-        "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
-        "name": "",
-        "collection": "",
-        "payonly": false,
-        "upsert": false,
-        "multi": false,
-        "operation": "update",
-        "x": 370,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "849ed0a079f50387",
+        "id": "a902fac8c21085e6",
         "type": "mongodb in",
         "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
+        "mongodb": "",
         "name": "",
         "collection": "",
         "operation": "find",
-        "x": 370,
+        "x": 400,
         "y": 140,
         "wires": [
             [
@@ -498,20 +466,50 @@
         ]
     },
     {
-        "id": "67ae898b1fc76da0",
+        "id": "84c75bed55ab1dd8",
         "type": "mongodb in",
         "z": "c740254358c79788",
-        "mongodb": "fcc87bbf870e413f",
+        "mongodb": "eef59e6e9401d087",
         "name": "",
         "collection": "",
         "operation": "aggregate",
-        "x": 370,
+        "x": 410,
         "y": 200,
         "wires": [
             [
                 "6544322b922c1a49"
             ]
         ]
+    },
+    {
+        "id": "7ce3e0949b4a483f",
+        "type": "mongodb out",
+        "z": "c740254358c79788",
+        "mongodb": "",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 440,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6a3c98d4b6b016de",
+        "type": "mongodb out",
+        "z": "c740254358c79788",
+        "mongodb": "eef59e6e9401d087",
+        "name": "",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "update",
+        "x": 450,
+        "y": 380,
+        "wires": []
     },
     {
         "id": "71d0784401d97a30",
@@ -1025,36 +1023,6 @@
         "wires": []
     },
     {
-        "id": "92ca080160500366",
-        "type": "inject",
-        "z": "c8b39bad946d8ab6",
-        "g": "81031a41452292e5",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 1160,
-        "wires": [
-            [
-                "68b716a28a9c06f9"
-            ]
-        ]
-    },
-    {
         "id": "d805f50510a64b71",
         "type": "debug",
         "z": "c8b39bad946d8ab6",
@@ -1160,36 +1128,6 @@
             ]
         ],
         "info": "Use in: User Management"
-    },
-    {
-        "id": "656d840a3ab148aa",
-        "type": "inject",
-        "z": "c8b39bad946d8ab6",
-        "g": "81031a41452292e5",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 1280,
-        "wires": [
-            [
-                "110f980283b587bc"
-            ]
-        ]
     },
     {
         "id": "081c8c3d3092e3d2",
@@ -1502,36 +1440,6 @@
         ]
     },
     {
-        "id": "1bf0f8c3c82add30",
-        "type": "inject",
-        "z": "c8b39bad946d8ab6",
-        "g": "a8bcf74ef7690d27",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 2100,
-        "wires": [
-            [
-                "c3b02c1f4edbee09"
-            ]
-        ]
-    },
-    {
         "id": "64d32109fbb50503",
         "type": "debug",
         "z": "c8b39bad946d8ab6",
@@ -1721,37 +1629,8 @@
         "y": 3100,
         "wires": [
             [
-                "5cc768d59c9037f5"
-            ]
-        ]
-    },
-    {
-        "id": "f120ca88df7a87b9",
-        "type": "inject",
-        "z": "c8b39bad946d8ab6",
-        "g": "3b2ecc05f3cef5f7",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 3060,
-        "wires": [
-            [
-                "ac9687b0e33d5319"
+                "5cc768d59c9037f5",
+                "bd903ea2c5d6bd1c"
             ]
         ]
     },
@@ -1788,8 +1667,8 @@
         "y": 3100,
         "wires": [
             [
-                "58eb2605635a4f7e",
-                "66961bddfd5aa161"
+                "66961bddfd5aa161",
+                "58eb2605635a4f7e"
             ]
         ]
     },
@@ -1801,7 +1680,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 710,
+        "x": 910,
         "y": 3100,
         "wires": []
     },
@@ -2278,7 +2157,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "check",
-        "func": "const regexEmail = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/i;\nconst regexPassword = /^(?!.*\\s).{8,}/;\nconst email = msg.payload.email.toLowerCase();\n\nif (!regexEmail.test(email)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"Email is invalid\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else if (!regexPassword.test(msg.payload.password)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"The password is invalid. The value must be at least 8 characters and without whitespaces\",\n        code: 401\n    }\n\n    return [null, msg];\n    \n} else {\n    msg.collection = \"admins\"\n    msg.fromApp = msg.payload\n\n    node.warn(msg.fromApp)\n\n    msg.payload = {\n        email: email,\n        deleted: false\n    }\n\n    return [msg, null];\n}",
+        "func": "const regexEmail = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/i;\nconst regexPassword = /^(?!.*\\s).{8,}/;\nconst email = msg.payload.email.toLowerCase();\n\nif (!regexEmail.test(email)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"Email is invalid\",\n        code: 401\n    }\n\n    return [null, msg];\n\n} else if (!regexPassword.test(msg.payload.password)) {\n    msg.statusCode = 401;\n    msg.payload = {\n        data: \"The password is invalid. The value must be at least 8 characters and without whitespaces\",\n        code: 401\n    }\n\n    return [null, msg];\n    \n} else {\n    msg.collection = \"admins\"\n    msg.fromApp = msg.payload\n\n    node.warn(msg.fromApp)\n\n    msg.payload = {\n        email: email,\n        deleted: false,\n        active: true\n    }\n\n    return [msg, null];\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -3047,36 +2926,6 @@
         "wires": []
     },
     {
-        "id": "2ebd6a025be6f11d",
-        "type": "inject",
-        "z": "c8b39bad946d8ab6",
-        "g": "d78377c07a215120",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 60,
-        "wires": [
-            [
-                "672799ed948f1313"
-            ]
-        ]
-    },
-    {
         "id": "e653dc9c2aa956f2",
         "type": "catch",
         "z": "c8b39bad946d8ab6",
@@ -3279,7 +3128,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "registration user",
-        "func": "let randomColor = \"#\" + Math.floor(Math.random() * 16777215).toString(16);\nlet encryptedPassword = await bcrypt.hash(msg.oldpayload.password, 10);\nconst verifyToken = await jwt.sign(\n    { id: Math.round(Math.random()) },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\n\nmsg.cookies = {};\nmsg.cookies[\"verify_token\"] = verifyToken;\nmsg.cookies[\"email_register\"] = msg.oldpayload.email;\n\nmsg.payload = {\n    \"_id\": objectid(),\n    \"deleted\": false,\n    \"avatarColor\": randomColor,\n    \"createdAt\": new Date(),\n    \"roles\": [objectid(\"634fe97d28c82b00103cd25d\")],\n    \"active\": false,\n    \"firstname\": msg.oldpayload.firstname,\n    \"lastname\": msg.oldpayload.lastname,\n    \"email\": msg.oldpayload.email.toLowerCase(),\n    \"password\": encryptedPassword,\n    verifyToken,\n    resetPassToken: \"\",\n    resetPassExpireToken: null\n}\n\nreturn msg;",
+        "func": "let randomColor = \"#\" + Math.floor(Math.random() * 16777215).toString(16);\nlet encryptedPassword = await bcrypt.hash(msg.oldpayload.password, 10);\nconst verifyToken = await jwt.sign(\n    { id: Math.round(Math.random()) },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\n\nmsg.cookies = {};\nmsg.cookies[\"verify_token\"] = verifyToken;\nmsg.cookies[\"email_register\"] = msg.oldpayload.email;\n\nmsg.payload = {\n    \"_id\": objectid(),\n    \"deleted\": false,\n    \"avatarColor\": randomColor,\n    \"createdAt\": new Date(),\n    \"roles\": [objectid(\"\")],\n    \"active\": false,\n    \"firstname\": msg.oldpayload.firstname,\n    \"lastname\": msg.oldpayload.lastname,\n    \"email\": msg.oldpayload.email.toLowerCase(),\n    \"password\": encryptedPassword,\n    verifyToken,\n    resetPassToken: \"\",\n    resetPassExpireToken: null\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3298,8 +3147,8 @@
                 "module": "jsonwebtoken"
             }
         ],
-        "x": 1080,
-        "y": 320,
+        "x": 1040,
+        "y": 400,
         "wires": [
             [
                 "eed04ab51fe181f6",
@@ -3316,8 +3165,8 @@
         "name": "",
         "statusCode": "400",
         "headers": {},
-        "x": 1140,
-        "y": 400,
+        "x": 860,
+        "y": 440,
         "wires": []
     },
     {
@@ -3334,8 +3183,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1180,
-        "y": 440,
+        "x": 920,
+        "y": 340,
         "wires": []
     },
     {
@@ -3352,8 +3201,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1050,
-        "y": 280,
+        "x": 850,
+        "y": 380,
         "wires": []
     },
     {
@@ -3367,8 +3216,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1320,
-        "y": 280,
+        "x": 1230,
+        "y": 360,
         "wires": [
             []
         ]
@@ -3379,7 +3228,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "msg to email",
-        "func": "const token = msg.payload.verifyToken;\nconst nodeUrl = env.get(\"nodeUrl\");\nconst url = `${nodeUrl}/verifyToken?token=${token}`;\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>Confirm Your Email Address</h1>\n    <p>Tap the button below to confirm your email address. If you didn't create an account, you can delete this email.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #95e4f0;\">Confirm</a>\n</div>\n`;\n\nmsg.to = msg.payload.email;\nmsg.topic = 'Ritman verifay';\nmsg.payload = text;\n\nreturn msg;",
+        "func": "const token = msg.payload.verifyToken;\nconst nodeUrl = env.get(\"nodeUrl\");\nconst url = `${nodeUrl}/verifyToken?token=${token}`;\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>Confirm Your Email Address</h1>\n    <p>Tap the button below to confirm your email address. If you didn't create an account, you can delete this email.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #95e4f0;\">Confirm</a>\n</div>\n`;\n\nmsg.to = msg.payload.email;\nmsg.topic = 'Verify';\nmsg.payload = text;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3390,8 +3239,8 @@
                 "module": "jsonwebtoken"
             }
         ],
-        "x": 1310,
-        "y": 320,
+        "x": 1010,
+        "y": 560,
         "wires": [
             [
                 "c156d588bb3ba207",
@@ -3414,8 +3263,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1290,
-        "y": 360,
+        "x": 1210,
+        "y": 400,
         "wires": []
     },
     {
@@ -3432,8 +3281,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1490,
-        "y": 280,
+        "x": 1210,
+        "y": 520,
         "wires": []
     },
     {
@@ -3444,8 +3293,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1470,
-        "y": 360,
+        "x": 1190,
+        "y": 600,
         "wires": []
     },
     {
@@ -3525,7 +3374,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "d78377c07a215120",
         "name": "msg to email",
-        "func": "const token = msg.payload.verifyToken;\nconst nodeUrl = env.get(\"nodeUrl\");\nconst url = `${nodeUrl}/verifyToken?token=${token}`;\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>Confirm Your Email Address</h1>\n    <p>Tap the button below to confirm your email address. If you didn't create an account, you can delete this email.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #95e4f0;\">Confirm</a>\n</div>\n`;\n\nmsg.to = msg.payload.email;\nmsg.topic = 'Ritman verifay';\nmsg.payload = text;\n\nreturn msg;",
+        "func": "const token = msg.payload.verifyToken;\nconst nodeUrl = env.get(\"nodeUrl\");\nconst url = `${nodeUrl}/verifyToken?token=${token}`;\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>Confirm Your Email Address</h1>\n    <p>Tap the button below to confirm your email address. If you didn't create an account, you can delete this email.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #95e4f0;\">Confirm</a>\n</div>\n`;\n\nmsg.to = msg.payload.email;\nmsg.topic = 'Verify';\nmsg.payload = text;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3751,7 +3600,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "2229ae9934019399",
         "name": "redirect to page",
-        "func": "const token = await jwt.sign(\n    { user_id: msg.payload[0]._id, email: msg.payload[0].email },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\nconst uiUrl = env.get(\"uiUrl\");\n\nmsg.token = token\nmsg.statusCode = 302\nmsg.headers = {\n    \"Access-Control-Allow-Origin\": \"*\",\n    \"Access-Control-Allow-Credentials\": true,\n    \"location\": `${uiUrl}/Login`\n}\n\nmsg.collection = \"admins\";\nmsg.query = {\n    _id: objectid(msg.payload[0]._id)\n}\nmsg.payload = {\n    $set: {\n        active: true,\n        verifyToken: null\n    }\n}\n\nnode.send(msg)",
+        "func": "node.warn(msg)\nconst token = await jwt.sign(\n    { user_id: msg.payload[0]._id, email: msg.payload[0].email },\n    \"test\",\n    {\n        expiresIn: \"150m\",\n    }\n);\n\nconst uiUrl = env.get(\"uiUrl\");\n\nmsg.token = token\nmsg.statusCode = 302\nmsg.headers = {\n    \"Access-Control-Allow-Origin\": \"*\",\n    \"Access-Control-Allow-Credentials\": true,\n    \"location\": `${uiUrl}/Login`\n}\n\nmsg.collection = \"admins\";\nmsg.query = {\n    _id: objectid(msg.payload[0]._id)\n}\nmsg.payload = {\n    $set: {\n        active: true,\n        verifyToken: null\n    }\n}\n\nnode.send(msg)",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3803,11 +3652,11 @@
         "g": "2229ae9934019399",
         "name": "",
         "links": [
-            "d18259abf93772bb"
+            "286431cd31c9fc7a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1640,
+        "x": 1660,
         "y": 1240,
         "wires": [
             []
@@ -4215,7 +4064,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "5bf7ccb6c6709633",
         "name": "msg to email",
-        "func": "const nodeUrl = env.get(\"nodeUrl\");\n// const nodeUrl = \"https://nodered-63735d50fd02061100000009.ubos.tech\";\nconst url = `${nodeUrl}/queryToResetPassword?token=${msg.token}`;\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>We received a request to reset your password</h1>\n    <p>Use the link below to set up a new password for your account. If you did not request to reset your password, ignore this email and the link will expire on its own.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #2E3D49;\">\n        SET NEW PASSWORD\n    </a>\n</div>\n`;\n\nmsg.to = msg.oldpayload.email;\nmsg.topic = 'Reset password';\nmsg.payload = text;\n\nreturn msg;",
+        "func": "const nodeUrl = env.get(\"nodeUrl\");\nconst url = `${nodeUrl}/queryToResetPassword?token=${msg.token}`;\n\nconst text = `\n<div style=\"padding: 10px 0; color: black;\">\n    <h1>We received a request to reset your password</h1>\n    <p>Use the link below to set up a new password for your account. If you did not request to reset your password, ignore this email and the link will expire on its own.</p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #2E3D49;\">\n        SET NEW PASSWORD\n    </a>\n</div>\n`;\n\nmsg.to = msg.oldpayload.email;\nmsg.topic = 'Reset password';\nmsg.payload = text;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4441,7 +4290,7 @@
         "z": "c8b39bad946d8ab6",
         "g": "5bf7ccb6c6709633",
         "name": "msg to email",
-        "func": "const uiUrl = env.get(\"uiUrl\");\nconst url = `${uiUrl}/Login`;\nconst dateChanged = new Date().toString().slice(0, 24);\nconst text = `\n<div style=\"padding: 10px 0; color: black;\" display: block;>\n    <img src=\"https://www.iconpacks.net/icons/2/free-icon-check-mark-3280.png\"; alt=\"Success Icon\"; width=90px; height=90px;>\n    <h1 text-align=\"center\" >Password changed!</h1>\n    <p>\n        Your password has been changed successfully. \n        This is a confirmation that your password was changed at <b>${dateChanged}</b>\n        <br><br>\n        Use your new password to log in.\n    </p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #72D393;\">\n        <b>LOGIN NOW</b>\n    </a>\n</div>\n`;\n\n// msg.to = 'daniil12.com13@gmail.com';\nmsg.to = msg.oldpayload[0].email;\nmsg.topic = 'Password changed';\nmsg.payload = text;\n\nreturn msg;",
+        "func": "const uiUrl = env.get(\"uiUrl\");\nconst url = `${uiUrl}/Login`;\nconst dateChanged = new Date().toString().slice(0, 24);\nconst text = `\n<div style=\"padding: 10px 0; color: black;\" display: block;>\n    <img src=\"https://www.iconpacks.net/icons/2/free-icon-check-mark-3280.png\"; alt=\"Success Icon\"; width=90px; height=90px;>\n    <h1 text-align=\"center\" >Password changed!</h1>\n    <p>\n        Your password has been changed successfully. \n        This is a confirmation that your password was changed at <b>${dateChanged}</b>\n        <br><br>\n        Use your new password to log in.\n    </p>\n    <a href=\"${url}\" target=\"_blank\" style=\"margin: 10px 0; display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background: #72D393;\">\n        <b>LOGIN NOW</b>\n    </a>\n</div>\n`;\n\nmsg.to = msg.oldpayload[0].email;\nmsg.topic = 'Password changed';\nmsg.payload = text;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4969,7 +4818,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 880,
-        "y": 500,
+        "y": 480,
         "wires": [
             [
                 "376f7da2f0d85f32"
@@ -5037,20 +4886,22 @@
         "id": "c156d588bb3ba207",
         "type": "e-mail",
         "z": "c8b39bad946d8ab6",
+        "g": "d78377c07a215120",
         "server": "smtp.gmail.com",
         "port": "465",
         "secure": true,
         "tls": true,
         "name": "",
         "dname": "",
-        "x": 1470,
-        "y": 320,
+        "x": 1190,
+        "y": 560,
         "wires": []
     },
     {
         "id": "8779a87db9bcb5dc",
         "type": "e-mail",
         "z": "c8b39bad946d8ab6",
+        "g": "d78377c07a215120",
         "server": "smtp.gmail.com",
         "port": "465",
         "secure": true,
@@ -5065,6 +4916,7 @@
         "id": "c44ba9b12aa0b19b",
         "type": "e-mail",
         "z": "c8b39bad946d8ab6",
+        "g": "5bf7ccb6c6709633",
         "server": "smtp.gmail.com",
         "port": "465",
         "secure": true,
@@ -5079,6 +4931,7 @@
         "id": "2b3fe1486cce4f95",
         "type": "e-mail",
         "z": "c8b39bad946d8ab6",
+        "g": "5bf7ccb6c6709633",
         "server": "smtp.gmail.com",
         "port": "465",
         "secure": true,
@@ -5087,6 +4940,24 @@
         "dname": "",
         "x": 1870,
         "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "bd903ea2c5d6bd1c",
+        "type": "debug",
+        "z": "c8b39bad946d8ab6",
+        "g": "3b2ecc05f3cef5f7",
+        "name": "all users",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 3060,
         "wires": []
     }
 ]
